@@ -10,24 +10,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 	<style>
-		* {
-			margin: 0px;
-			padding: 0px;
-			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-			-webkit-touch-callout: none;
-			-webkit-user-select: none;
-			-khtml-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
-		}
+		/*VARIABLE DECELERATIONS*/
+        :root {/* colors */--color-black-rgb:35,34,35;--color-white-rgb:246,247,246;--color-black-hex:#232223;--color-white-hex:#F6F7F6;/* font families */--font_family-primary: "Cinzel Regular";--font_family-secondary: "Cutive Mono Regular";--font_family-sans_serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";--font_family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;--font_weight-regular: 400;}
 
-		body {
-			background-color: #a1a1a1;
-			background-image: url('/round.png');
-			font-family: "Montserrat", "Open Sans", "Georgia", serif;
-			text-rendering: optimizeLegibility;
-		}
+        /*BROWSER CONSISTENCY*/
+        html,body,div,span,a,h1,footer,main,::after,::before {box-sizing: border-box;}html {font-size: 10px;line-height: 1.5;}body {font-size: 1rem;line-height: 1.5;}html,body,noscript,div,span,a,h1 {border: none;margin: 0;padding: 0;}footer,main {display: block;}h1 {font-size: 100%;font-weight: var(--font_weight-regular);}
 
 		#container {
 			width: 640px;
@@ -81,7 +68,7 @@
 			width: 590px;
 			background-color: #fff;
 			margin-bottom: 10px;
-			box-shadow: 0px 3px #919191;
+			/* box-shadow: 0px 3px #919191; */
 		}
 
 		.square,
@@ -178,10 +165,25 @@
 		</ol>
 	</div>
 
+    
+
 	<div id="container">
 
-		<div id="board"></div>
+        <div id="header"></div>
 
+		<div id="board"></div>
+        
+        <div id="footer">
+
+            <ul class="">
+                <li class=""><a href="" class="" target="_blank"><i class="">Twitch</i></a></li>
+                <li class=""><a href="" class="" target="_blank"><i class="">Discord</i></a></li>
+                <li class=""><a href="" class="" target="_blank"><i class="">Twitter</i></a></li>
+                <li class=""><a href="" class="" target="_blank"><i class="">YouTube</i></a></li>
+                <li class=""><a href="" class="" target="_blank"><i class="">StockTwits</i></a></li>
+            </ul>
+
+        </div>
 	</div>
 </body>
 
@@ -324,8 +326,11 @@
 
 <script>
 	var headerText = "";
+
 	var footerText = "";
+
 	var winText = "Winner";
+
 	var JSONBingo = {
 		"squares": [{
 			"square": "...% Of More"
@@ -406,7 +411,7 @@
 		}, {
 			"square": "Engaging And Interactive"
 		}, {
-			"square": "Expect/Exceptions_"
+			"square": "Expect / Exceptions"
 		}, {
 			"square": "Fire Sale"
 		}, {
@@ -466,225 +471,89 @@
 		}, {
 			"square": "Moderator"
 		}, {
-			"square": "_"
+			"square": "Momentum"
 		}, {
-			"square": "_"
+			"square": "Move The Needle"
 		}, {
-			"square": "_"
+			"square": "Negative"
 		}, {
-			"square": "_"
+			"square": "Next Generation"
 		}, {
-			"square": "_"
+			"square": "No Guidance"
 		}, {
-			"square": "_"
+			"square": "Omnichannel"
 		}, {
-			"square": "_"
+			"square": "Operating Growth"
 		}, {
-			"square": "_"
+			"square": "Pain Point"
 		}, {
-			"square": "_"
+			"square": "Peak"
 		}, {
-			"square": "_"
+			"square": "Investor Gets Mad"
 		}, {
-			"square": "_"
+			"square": "Pivoting"
 		}, {
-			"square": "_"
+			"square": "Predictive Analytics"
 		}, {
-			"square": "_"
+			"square": "Pro-rata Investment"
 		}, {
-			"square": "_"
+			"square": "Proof Of Concept"
 		}, {
-			"square": "_"
+			"square": "Reconciliation"
 		}, {
-			"square": "_"
+			"square": "RegTech"
 		}, {
-			"square": "_"
+			"square": "Retargeting"
 		}, {
-			"square": "_"
+			"square": "Roadmap"
 		}, {
-			"square": "_"
+			"square": "Selling Into Strength"
 		}, {
-			"square": "_"
+			"square": "Short"
 		}, {
-			"square": "_"
+			"square": "Simple and Intuitive"
 		}, {
-			"square": "_"
+			"square": "Subscription-base"
 		}, {
-			"square": "_"
+			"square": "Sustainability"
 		}, {
-			"square": "_"
+			"square": "Synergy / Synergistic"
 		}, {
-			"square": "_"
+			"square": "Synthetic"
 		}, {
-			"square": "_"
+			"square": "Technology Enabled Service"
 		}, {
-			"square": "_"
+			"square": "The Skinny"
 		}, {
-			"square": "_"
+			"square": "Thought Leadership"
 		}, {
-			"square": "_"
+			"square": "Topline"
 		}, {
-			"square": "_"
+			"square": "Touchpoint"
 		}, {
-			"square": "_"
+			"square": "Trend"
 		}, {
-			"square": "_"
+			"square": "U-Shaped Recovery"
 		}, {
-			"square": "_"
+			"square": "Unpack"
 		}, {
-			"square": "_"
+			"square": "User Experience"
 		}, {
-			"square": "_"
+			"square": "User-generated Content"
 		}, {
-			"square": "_"
+			"square": "V-Shaped Recovery"
 		}, {
-			"square": "_"
+			"square": "Version [x]"
 		}, {
-			"square": "_"
+			"square": "Visibility"
 		}, {
-			"square": "_"
+			"square": "Visualization"
 		}, {
-			"square": "_"
+			"square": "W-Shaped Recovery"
 		}, {
-			"square": "_"
+			"square": "Whisper"
 		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
-		}, {
-			"square": "_"
+			"square": "Yield"
 		}]
 	};
 </script>
