@@ -1,22 +1,772 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=`, initial-scale=1.0">
-    <title>Earnings BINGO</title>
-</head>
-<body>
-    <h1>Welcome to Earnings BINGO brought to you by <a href="https://www.twitch.tv/martinirita" target="_blank">MartinaRita</a></h1>
 
-    <h2>How to play</h2>
-    <div class="">
-        <ol class="">
-            <li class="">Insturction Rule #1</li>
-            <li class="">Insturction Rule #2</li>
-            <li class="">Insturction Rule #3</li>
-            <li class="">Insturction Rule #4</li>
-        </ol>
-    </div>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=`, initial-scale=1.0">
+	<title>Earnings BINGO</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<style>
+		* {
+			margin: 0px;
+			padding: 0px;
+			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+
+		body {
+			background-color: #a1a1a1;
+			background-image: url('/round.png');
+			font-family: "Montserrat", "Open Sans", "Georgia", serif;
+			text-rendering: optimizeLegibility;
+		}
+
+		#container {
+			width: 640px;
+			display: block;
+			margin: 0 auto;
+			background-color: none;
+		}
+
+		#header,
+		#footer {
+			display: block;
+			float: left;
+			width: 600px;
+			color: #2196f3;
+			text-align: center;
+			opacity: 0.5;
+			text-shadow: 0px 1px 0px #e1e1e1, 0px -1px 0px #313131;
+			background-color: none;
+			font-size: 2.5em;
+			font-weight: bold;
+			padding: 6px 8px;
+			transition-property: background-color;
+			transition-duration: 1s;
+			-moz-transition-property: background-color;
+			-moz-transition-duration: 1s;
+			-webkit-transition-property: background-color;
+			-webkit-transition-duration: 1s;
+		}
+
+		#pia {
+			width: 590px;
+			text-align: center;
+			margin-bottom: 0;
+		}
+
+		#footer {
+			text-align: center;
+			font-size: 1.4em;
+			padding: 3px 20px;
+			margin-bottom: 80px;
+		}
+
+		#footer a {
+			text-decoration: none;
+			color: #8B3E2F;
+		}
+
+		#board {
+			display: block;
+			float: left;
+			width: 590px;
+			background-color: #fff;
+			margin-bottom: 10px;
+			box-shadow: 0px 3px #919191;
+		}
+
+		.square,
+		.freesquare {
+			display: block;
+			float: left;
+			overflow: hidden;
+			background-color: #fff;
+			color: #313131;
+			text-align: center;
+			width: 110px;
+			height: 110px;
+			padding: 3px;
+			border: 1px solid #d1d1d1;
+			transition-property: background-color;
+			transition-duration: 1s;
+			-moz-transition-property: background-color;
+			-moz-transition-duration: 1s;
+			-webkit-transition-property: background-color;
+			-webkit-transition-duration: 1s;
+		}
+
+		.selected {
+			color: #f1f1f1;
+			background-color: #313131;
+		}
+
+		.text {
+			font-family: "Montserrat", "Open Sans", "Georgia", serif;
+			vertical-align: middle;
+			font-size: 1.2em;
+			line-height: 1.2em;
+		}
+
+		.small {
+			font-size: 0.8em;
+		}
+
+		.medium {
+			font-size: 1.0em;
+		}
+
+		.large {
+			font-size: 1.2em;
+		}
+
+		.win {
+			color: #ffffff !important;
+			background-color: #4CAF50;
+		}
+
+		.ad {
+			padding: 0;
+			margin: 1em;
+		}
+
+		@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+			#container {
+				width: 640;
+				margin: -7px 0px 0px -7px;
+			}
+
+			#header {
+				font-size: 3.6em;
+				text-align: center;
+				padding: 20px 20px 12px 20px;
+			}
+
+			#footer {
+				padding: 16px 20px 8px 20px;
+				font-size: 2.0em;
+			}
+
+			.text {
+				font-size: 1.2em;
+				line-height: 1.2em;
+			}
+		}
+	</style>
+
+</head>
+
+<body>
+	<h1>Welcome to Earnings BINGO brought to you by <a href="https://www.twitch.tv/martinirita" target="_blank">MartinaRita</a></h1>
+
+	<h2>How to play</h2>
+	<div class="">
+		<ol class="">
+			<li class="">Insturction Rule #1</li>
+			<li class="">Insturction Rule #2</li>
+			<li class="">Insturction Rule #3</li>
+			<li class="">Insturction Rule #4</li>
+		</ol>
+	</div>
+
+	<div id="container">
+
+		<div id="board"></div>
+
+	</div>
 </body>
+
+<script>
+	/*
+		* jquery.tappable.js version 0.2
+		*
+		* More responsive (iOS-like) touch behaviour for buttons and other 'tappable' UI
+		* elements, instead of Mobile Safari's 300ms delay and ugly grey overlay:
+		*
+		*  - A 'touched' class is added to the element as soon as it is tapped (or, in
+		*    the case of a "long tap" - when the user keeps their finger down for a
+		*    moment - after a specified delay).
+		*
+		*  - The supplied callback is called as soon as the user lifts their finger.
+		*
+		*  - The class is removed, and firing of the callback cancelled, if the user moves
+		*    their finger (though this can be disabled).
+		*
+		*  - If the browser doesn't support touch events, it falls back to click events.
+		*
+		* More detailed explanation of behaviour and background:
+		* http://aanandprasad.com/articles/jquery-tappable/
+		*
+		* See it in action here: http://nnnnext.com
+		*
+		* I recommend that you add a `-webkit-tap-highlight-color: rgba(0,0,0,0)`
+		* style rule to any elements you wish to make tappable, to hide the ugly grey
+		* click overlay.
+		*
+		* Tested on iOS 4.3 and some version of Android, I don't know. Leave me alone.
+		*
+		* Basic usage:
+		*
+		*   $(element).tappable(function() { console.log("Hello World!") })
+		*
+		* Advanced usage:
+		*
+		*   $(element).tappable({
+		*     callback:     function() { console.log("Hello World!") },
+		*     cancelOnMove: false,
+		*     touchDelay:   150,
+		*     onlyIf:       function(el) { return $(el).hasClass('enabled') }
+		*   })
+		*
+		* Options:
+		*
+		*   cancelOnMove: If truthy, then as soon as the user moves their finger, the
+		*                 'touched' class is removed from the element. When they lift
+		*                 their finger, the callback will *not* be fired. Defaults to
+		*                 true.
+		*
+		*   touchDelay:   Time to wait (ms) before adding the 'touched' class when the
+		*                 user performs a "long tap". Best employed on elements that the
+		*                 user is likely to touch while scrolling. Around 150 will work
+		*                 well. Defaults to 0.
+		*   
+		*   onlyIf:       Function to run as soon as the user touches the element, to
+		*                 determine whether to do anything. If it returns a falsy value,
+		*                 the 'touched' class will not be added and the callback will
+		*                 not be fired.
+		*
+		*/
+	;
+	(function($) {
+		var touchSupported = ('ontouchstart' in window)
+		$.fn.tappable = function(options) {
+			var cancelOnMove = true,
+				onlyIf = function() {
+					return true
+				},
+				touchDelay = 0,
+				callback
+			switch (typeof options) {
+				case 'function':
+					callback = options
+					break;
+				case 'object':
+					callback = options.callback
+					if (typeof options.cancelOnMove != 'undefined') {
+						cancelOnMove = options.cancelOnMove
+					}
+					if (typeof options.onlyIf != 'undefined') {
+						onlyIf = options.onlyIf
+					}
+					if (typeof options.touchDelay != 'undefined') {
+						touchDelay = options.touchDelay
+					}
+					break;
+			}
+			var fireCallback = function(el, event) {
+				if (typeof callback == 'function' && onlyIf(el)) {
+					callback.call(el, event)
+				}
+			}
+			if (touchSupported) {
+				this.bind('touchstart', function(event) {
+					var el = this
+					if (onlyIf(this)) {
+						$(el).addClass('touch-started')
+						window.setTimeout(function() {
+							if ($(el).hasClass('touch-started')) {
+								$(el).addClass('touched')
+							}
+						}, touchDelay)
+					}
+					return true
+				})
+				this.bind('touchend', function(event) {
+					var el = this
+					if ($(el).hasClass('touch-started')) {
+						$(el)
+							.removeClass('touched')
+							.removeClass('touch-started')
+						fireCallback(el, event)
+					}
+					return true
+				})
+				this.bind('click', function(event) {
+					event.preventDefault()
+				})
+				if (cancelOnMove) {
+					this.bind('touchmove', function() {
+						$(this)
+							.removeClass('touched')
+							.removeClass('touch-started')
+					})
+				}
+			} else if (typeof callback == 'function') {
+				this.bind('click', function(event) {
+					if (onlyIf(this)) {
+						callback.call(this, event)
+					}
+				})
+			}
+			return this
+		}
+	})(jQuery);
+</script>
+
+<script>
+	var headerText = "";
+	var footerText = "";
+	var winText = "Winner";
+	var JSONBingo = {
+		"squares": [{
+			"square": "Scammer Says 'Do Not Touch Your Computer'"
+		}, {
+			"square": "Scammer Says 'Hang Up And Someone/I Will Call You Back'"
+		}, {
+			"square": "Scammer Says 'Wasting My Time'"
+		}, {
+			"square": "Scammer Says 'Each And Everything'"
+		}, {
+			"square": "Scammer Says 'Just Wait A Moment'"
+		}, {
+			"square": "Scammer Says 'Leave Your Mouse'"
+		}, {
+			"square": "Scammer Says 'C-T-R-L'"
+		}, {
+			"square": "Scammer Says 'Do One Thing'"
+		}, {
+			"square": "Scammer Says 'Different Different'"
+		}, {
+			"square": "Scammer Says 'Windows Logo Key'"
+		}, {
+			"square": "Scammer Asks 'What Do You See On Your Screen?'"
+		}, {
+			"square": "Scammer Says 'Click On Run'"
+		}, {
+			"square": "Scammer Says 'Do Not Worry'"
+		}, {
+			"square": "Scammer Says 'You Just Wait'"
+		}, {
+			"square": "Scammer Says 'Listen To Me'"
+		}, {
+			"square": "Scammer Says 'Pen And Paper'"
+		}, {
+			"square": "Scammer Says 'Give A Click'"
+		}, {
+			"square": "Scammer Says 'T Like/For/As In Tango'"
+		}, {
+			"square": "Scammer Says 'E Like/For/As In Edward'"
+		}, {
+			"square": "Scammer Says 'A Like/For/As In America'"
+		}, {
+			"square": "Scammer Says 'M Like/For/As In Mary'"
+		}, {
+			"square": "Scammer Says 'V Like/For/As In Victor'"
+		}, {
+			"square": "Scammer Says 'I Like/For/As In Indiana'"
+		}, {
+			"square": "Scammer Says 'W Like/For/As In Whiskey'"
+		}, {
+			"square": "Scammer Says 'Dot Like/For/As In A Period'"
+		}, {
+			"square": "Scammer Says 'C Like/For/As In Charlie'"
+		}, {
+			"square": "Scammer Says 'OLike/For/As In Oscar'"
+		}, {
+			"square": "Scammer Says 'U Like/For/As In Umbrella'"
+		}, {
+			"square": "Scammer Says 'L Like/For/As In Lima'"
+		}, {
+			"square": "Scammer Says 'Y Like/For/As In Yankee'"
+		}, {
+			"square": "Scammer Says 'D Like/For/As In Delta'"
+		}, {
+			"square": "Scammer Says 'N Like/For/As In November'"
+		}, {
+			"square": "Scammer Says 'P Like/For/As In Peter'"
+		}, {
+			"square": "Scammer Asks 'What Have You Done?'"
+		}, {
+			"square": "Scammer Asks 'Does Anyone Else Use This Computer?'"
+		}, {
+			"square": "Scammer Says 'Laptop Or Desktop'"
+		}, {
+			"square": "Scammer Says 'Oversmart'"
+		}, {
+			"square": "Scammer Says 'I Will Lose My Job'"
+		}, {
+			"square": "Scammer Says 'No No No No'"
+		}, {
+			"square": "Scammer Says 'Blunder'"
+		}, {
+			"square": "Scammer Says 'Glass Of Water'"
+		}, {
+			"square": "Scammer Says 'Kitboga'"
+		}, {
+			"square": "Scammer Asks 'Are You Infornt Of Your Computer Right Now?'"
+		}, {
+			"square": "Scammer Says 'Personal Purpose'"
+		}, {
+			"square": "Scammer Says 'I'm Holding The Line'"
+		}, {
+			"square": "Scammer Says 'Secure Server'"
+		}, {
+			"square": "Scammer Says 'Youtube'"
+		}, {
+			"square": "Scammer Says 'Recorded Line'"
+		}, {
+			"square": "Scammer Asks 'How Old Are You'"
+		}, {
+			"square": "Scammer Says 'Thank You For Calling Support'"
+		}, {
+			"square": "Scammer Says 'V Like/For/As In Victor'"
+		}, {
+			"square": "Scammer Says 'C-T-R-L'"
+		}, {
+			"square": "Scammer Says 'You Just Wait'"
+		}, {
+			"square": "Scammer Says 'Pen And Paper'"
+		}, {
+			"square": "Scammer Says 'Personal Purpose'"
+		}, {
+			"square": "Scammer Says 'E Like/For/As In Edward'"
+		}, {
+			"square": "Scammer Says 'I Will Lose My Job'"
+		}, {
+			"square": "Scammer Says 'Youtube'"
+		}, {
+			"square": "Item"
+		}, {
+			"square": "Scammer Connects With Anydesk"
+		}, {
+			"square": "Scammer Connects With Ultraviewer"
+		}, {
+			"square": "Scammer Connects With Teamviewer"
+		}, {
+			"square": "Scammer Connects With GotoAssist"
+		}, {
+			"square": "Scammer Connects With Supremo"
+		}, {
+			"square": "Scammer Connects With More Than One Screen-Sharing Software"
+		}, {
+			"square": "Scammer Runs The Tree Command"
+		}, {
+			"square": "Scammer Runs The Netstat"
+		}, {
+			"square": "Scammer Brings Kit To GeekTyper.com"
+		}, {
+			"square": "Scammer Uses Notepad"
+		}, {
+			"square": "Scammer Opens CMD"
+		}, {
+			"square": "Scammer Deletes/Hides Icons"
+		}, {
+			"square": "Scammer Changes Computer Password"
+		}, {
+			"square": "Scammer Mentions 'Hackers' On 'The Network'"
+		}, {
+			"square": "Scammer Transfers Call To Senior Supervisor"
+		}, {
+			"square": "Scammer Transfers Call To Billing Department"
+		}, {
+			"square": "Scammer Describes What An IP Address Is"
+		}, {
+			"square": "Scammer Points Out Foreign Connections"
+		}, {
+			"square": "Scammer Shows Kit The Event Viewer"
+		}, {
+			"square": "Scammer Opens WindowsCam"
+		}, {
+			"square": "Scammer Connects With Teamviewer"
+		}, {
+			"square": "Scammer Opens CMD"
+		}, {
+			"square": "Scammer Uses Notepad"
+		}, {
+			"square": "Scammer Mentions 'Hackers' On 'The Network'"
+		}, {
+			"square": "Item"
+		}, {
+			"square": "Scam Amount More Than $3000"
+		}, {
+			"square": "Scam Amount More Than $5000"
+		}, {
+			"square": "Scam Amount More Than $10K"
+		}, {
+			"square": "Scammer Asks For Gift Cards"
+		}, {
+			"square": "Scammer Asks Kit To Go To Walmart"
+		}, {
+			"square": "Scammer Asks Kit To Go To Target"
+		}, {
+			"square": "Scammer Asks Kit To Go To Best Buy"
+		}, {
+			"square": "Scammer Tries To Edit HTML"
+		}, {
+			"square": "Scammer Uses Chase Bank Demo"
+		}, {
+			"square": "Scammer Offers Kit A Bonus If He Returns The Money"
+		}, {
+			"square": "Scammer Offers Kit A Lifetime Plan"
+		}, {
+			"square": "Scammer Asks Is Kit Has Any Bitcoin"
+		}, {
+			"square": "Scammer Gives Kit A Bank Account"
+		}, {
+			"square": "Scammer Makes The Bank Page Very Small"
+		}, {
+			"square": "Scammer Attempts To Distract Kit With A Long Fake Code"
+		}, {
+			"square": "Scammer Gives Kit A Cash App Account"
+		}, {
+			"square": "Scammer Asks Kit To Withdraw Money And Mail It"
+		}, {
+			"square": "Scammer Threatens To Take All Of Kit's Money"
+		}, {
+			"square": "Scammer Transfers Money From The Savings Account To The Checking Account On The Fake Bank"
+		}, {
+			"square": "Scammer Pretends To Be An Officer (Of Any Type)"
+		}, {
+			"square": "Scam Amount More Than $5000"
+		}, {
+			"square": "Scammer Asks For Gift Cards"
+		}, {
+			"square": "Scammer Pretends To Be An Officer (Of Any Type)"
+		}, {
+			"square": "Scammer Threatens To Take All Of Kit's Money"
+		}, {
+			"square": "Item"
+		}, {
+			"square": "Kit Merges Two Or More Calls"
+		}, {
+			"square": "Kit Accidently Uses Wrong Voice"
+		}, {
+			"square": "Kit Calls His Fake Bank"
+		}, {
+			"square": "Kit Uses Driving Simulator (Beam NG)"
+		}, {
+			"square": "Kit Fills Out A Form"
+		}, {
+			"square": "Kit Uses Multiple Personas In One Call"
+		}, {
+			"square": "Kit Quotes Ms. Frizzle"
+		}, {
+			"square": "Kit Quotes Bob Ross"
+		}, {
+			"square": "Kit Deletes The Overlay On The Fake Bank For The Scammer"
+		}, {
+			"square": "Kit Uses MS Paint While Scammer Is Connected"
+		}, {
+			"square": "The Timer For A Scam Call Reaches 1 Hour On Stream"
+		}, {
+			"square": "The Timer For A Scam Call Reaches 3 Hours On Stream"
+		}, {
+			"square": "The Timer For A Scam Call Reaches 5 Hours On Stream"
+		}, {
+			"square": "The Timer For A Scam Call Reaches 10 Hours On Stream"
+		}, {
+			"square": "Kit Says 'Happy Anniversary'"
+		}, {
+			"square": "Kit Brings A Guest On Stream"
+		}, {
+			"square": "Kit Codes On Stream"
+		}, {
+			"square": "Kit Eats On Stream"
+		}, {
+			"square": "Kit Fake Redeems A Gift Card"
+		}, {
+			"square": "Kit Pretends To Purchase Something Online Using The Refund Money"
+		}, {
+			"square": "Kit Uses Multiple Personas In One Call"
+		}, {
+			"square": "Kit Fills Out A Form"
+		}, {
+			"square": "Item"
+		}, {
+			"square": "Animal Sounds In The Background"
+		}, {
+			"square": "Baby Sounds In The Background"
+		}, {
+			"square": "Scammer Attempts To Flatter Kit's Persona By Saying They Sounds Young"
+		}, {
+			"square": "Scammer Pretends To Cry"
+		}, {
+			"square": "Phone Call Is Transferred Without Warning"
+		}, {
+			"square": "Call Disconnects Suddenly Around 1 Hour"
+		}, {
+			"square": "Hold Music Suddenly Plays In The Middle Of A Call"
+		}, {
+			"square": "Scammer Congratulates Kit After Connecting With A Screen-Sharing Software"
+		}, {
+			"square": "Scammer Says 'You Are Like My Mom/Grandmother'"
+		}, {
+			"square": "Scammer Says  'You Are Like My Dad/Grandfather'"
+		}, {
+			"square": "Scammer Talks About Their Expensive Vehicle"
+		}, {
+			"square": "Kit And The Scammer Share An Awkward Series Of Laughs"
+		}, {
+			"square": "Scammer Says They Knew The Entire Time (After Wasting More Than 1 Hour)"
+		}, {
+			"square": "Scammer Burps While On The Phone"
+		}, {
+			"square": "Scammer Sings"
+		}, {
+			"square": "Scammer Eats While On Call"
+		}, {
+			"square": "Scammer Has To Use Restroom"
+		}, {
+			"square": "Scammer's Manager Is Audibly Coaching Them Through The Scam"
+		}, {
+			"square": "Scammer Talks About Their Pets"
+		}, {
+			"square": "Scammer Yells At Kit"
+		}, {
+			"square": "Scammer's Manager Is Audibly Coaching Them Through The Scam"
+		}, {
+			"square": "Baby Sounds In The Background"
+		}, {
+			"square": "Scammer Attempts To Flatter Kit's Persona By Saying They Sounds Young"
+		}, {
+			"square": "Scammer Says They Knew The Entire Time (After Wasting More Than 1 Hour)"
+		}, {
+			"square": "Item"
+		}, {
+			"square": "Kit Uses 'Jeb' Persona"
+		}, {
+			"square": "Kit Uses 'Dixie' Persona"
+		}, {
+			"square": "Kit Uses 'Nevaeh' Persona"
+		}, {
+			"square": "Kit Uses 'Edna' Persona"
+		}, {
+			"square": "Kit Uses 'Edmund' Persona"
+		}, {
+			"square": "Kit Uses 'Bernice' Persona"
+		}, {
+			"square": "Kit Uses 'Daniel' Persona"
+		}, {
+			"square": "Kit Uses 'Tyler' Persona"
+		}, {
+			"square": "Kit Uses 'Victor' Persona"
+		}, {
+			"square": "Kit Uses 'Josh The Banker' Persona"
+		}, {
+			"square": "Scammer's Name Is David"
+		}, {
+			"square": "Scammer's Name Is John"
+		}, {
+			"square": "Scammer's Name Is Kevin"
+		}, {
+			"square": "Scammer's Name Is Mark"
+		}, {
+			"square": "Scammer's Name Is Alex"
+		}, {
+			"square": "Scammer's Name Is Sam"
+		}, {
+			"square": "Scammer's Name Is Mike"
+		}, {
+			"square": "Scammer's Name Is Steve"
+		}, {
+			"square": "Scammer's Name Is James"
+		}, {
+			"square": "Scammer's Name Is Peter"
+		}, {
+			"square": "Kit Uses 'Edna' Persona"
+		}, {
+			"square": "Scammer's Name Is David"
+		}]
+	};
+</script>
+
+<script>
+	$(document).ready(function() {
+		$('body').on('touchmove', false);
+		$('#header').append(headerText);
+		$('#footer').append(footerText);
+		shuffle(JSONBingo.squares);
+		for (i = 0; i < 24; i++) {
+			if (i == 12) {
+				$('#board').append("<div data-value='1' class='selected freesquare' id='sqfree'><div class='text'><br/>free space</div></div>");
+				$('#board').append("<div data-value='0' class='square' id='sq12'><div class='text'><br/>" + JSONBingo.squares[i].square + "</div></div>");
+			} else {
+				$('#board').append("<div data-value='0' class='square' id='sq" + i + "'><div class='text'><br/>" + JSONBingo.squares[i].square + "</div></div>");
+			}
+		}
+		$('div.square').tappable(function() {
+			$(this).toggleClass('selected');
+			if ($(this).data('value') == 1) {
+				//alert(event.target.id);
+				$(this).data('value', 0);
+			} else {
+				//alert(event.target.id);
+				$(this).data('value', 1);
+			}
+			var row1 = ($('#sq0').data('value') + $('#sq1').data('value') + $('#sq2').data('value') + $('#sq3').data('value') + $('#sq4').data('value'));
+			var row2 = ($('#sq5').data('value') + $('#sq6').data('value') + $('#sq7').data('value') + $('#sq8').data('value') + $('#sq9').data('value'));
+			var row3 = ($('#sq10').data('value') + $('#sq11').data('value') + $('#sqfree').data('value') + $('#sq12').data('value') + $('#sq13').data('value'));
+			var row4 = ($('#sq14').data('value') + $('#sq15').data('value') + $('#sq16').data('value') + $('#sq17').data('value') + $('#sq18').data('value'));
+			var row5 = ($('#sq19').data('value') + $('#sq20').data('value') + $('#sq21').data('value') + $('#sq22').data('value') + $('#sq23').data('value'));
+			var col1 = ($('#sq0').data('value') + $('#sq5').data('value') + $('#sq10').data('value') + $('#sq14').data('value') + $('#sq19').data('value'));
+			var col2 = ($('#sq1').data('value') + $('#sq6').data('value') + $('#sq11').data('value') + $('#sq15').data('value') + $('#sq20').data('value'));
+			var col3 = ($('#sq2').data('value') + $('#sq7').data('value') + $('#sqfree').data('value') + $('#sq16').data('value') + $('#sq21').data('value'));
+			var col4 = ($('#sq3').data('value') + $('#sq8').data('value') + $('#sq12').data('value') + $('#sq17').data('value') + $('#sq22').data('value'));
+			var col5 = ($('#sq4').data('value') + $('#sq9').data('value') + $('#sq13').data('value') + $('#sq18').data('value') + $('#sq23').data('value'));
+			var diag1 = ($('#sq0').data('value') + $('#sq6').data('value') + $('#sqfree').data('value') + $('#sq17').data('value') + $('#sq23').data('value'));
+			var diag2 = ($('#sq4').data('value') + $('#sq8').data('value') + $('#sqfree').data('value') + $('#sq15').data('value') + $('#sq19').data('value'));
+			if (row1 == 5 || row2 == 5 || row3 == 5 || row4 == 5 || row5 == 5 || col1 == 5 || col2 == 5 || col3 == 5 || col4 == 5 || col5 == 5 || diag1 == 5 || diag2 == 5) {
+				$('#header').html(winText);
+				$('#header').addClass("win");
+			} else {
+				$('#header').html(headerText);
+				$('#header').removeClass("win");
+			};
+		});
+	});
+	shuffle = function(v) {
+		for (var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);
+		return v;
+	};
+	/*! Normalized address bar hiding for iOS & Android (c) @scottjehl MIT License */
+	(function(win) {
+		var doc = win.document;
+		// If there's a hash, or addEventListener is undefined, stop here
+		if (!location.hash && win.addEventListener) {
+			//scroll to 1
+			window.scrollTo(0, 1);
+			var scrollTop = 1,
+				getScrollTop = function() {
+					return win.pageYOffset || doc.compatMode === "CSS1Compat" && doc.documentElement.scrollTop || doc.body.scrollTop || 0;
+				},
+				//reset to 0 on bodyready, if needed
+				bodycheck = setInterval(function() {
+					if (doc.body) {
+						clearInterval(bodycheck);
+						scrollTop = getScrollTop();
+						win.scrollTo(0, scrollTop === 1 ? 0 : 1);
+					}
+				}, 15);
+			win.addEventListener("load", function() {
+				setTimeout(function() {
+					//at load, if user hasn't scrolled more than 20 or so...
+					if (getScrollTop() < 20) {
+						//reset to hide addr bar at onload
+						win.scrollTo(0, scrollTop === 1 ? 0 : 1);
+					}
+				}, 0);
+			});
+		}
+	})(this);
+</script>
+
 </html>
