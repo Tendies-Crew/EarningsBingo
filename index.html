@@ -25,6 +25,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="icons/all.css">
 
 	<style type="text/css">
@@ -44,8 +49,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
             */
 
             /* font families */
-            --font_family-primary: "Cinzel Regular";
-            --font_family-secondary: "Cutive Mono Regular";
+            --font_family-primary: "Inconsolata";
+            --font_family-secondary: "Inconsolata";
             --font_family-sans_serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             --font_family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
             --font_weight-regular: 400;
@@ -276,10 +281,17 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
             font-size: 2.4em;
         }
 
+        h1, h2, ol {
+            font-family: var(--font_family-primary);    
+        }
+
         .instructions {
             font-size: 1.5em;
         }
 
+        #board {
+            font-family: var(--font_family-secondary);
+        }
 
         .footer-item {
             font-size: 2.4em;
