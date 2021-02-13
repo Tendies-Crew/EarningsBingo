@@ -200,10 +200,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
 
 		#board {
-			background-color: #fff;
-            display: block;
-			float: left;
-			width: 550px;
+            width: 550px;
 		}
 
 		.square,
@@ -231,12 +228,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 			background-color: rgb(247,150,34);
 		}
 
-		.text {
-			
-			vertical-align: middle;
-			font-size: 1.2em;
-			line-height: 1.2em;
-		}
+
 
 
 
@@ -248,7 +240,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
 
 
-        .container {
+        .root {
             background: rgb(247,150,34);
             background: linear-gradient(156deg, rgba(247,150,34,1) 0%, rgba(255,146,175,0.9) 25%, rgba(164,55,114,0.85) 75%, rgba(196,84,105,1) 100%);
             display: grid;
@@ -335,40 +327,43 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
     
 
-	<div class="container">
+	<div class="root">
 
-        <h1>Welcome to Earnings BINGO brought to you by <a href="https://www.twitch.tv/martinirita" target="_blank">MartinaRita</a></h1>
+        <div class="container">
 
-        <div class="">
-            
-        </div>
+            <h1>Welcome to Earnings BINGO brought to you by <a href="https://www.twitch.tv/martinirita" target="_blank">MartinaRita</a></h1>
 
-        <h2>How Earnings BINGO works:</h2>
-        <div class="">
-            <ol class="instructions">
-                <li class="">Join the MartinaRita Discord <a href="https://discord.gg/BnVzUCBq" class="" target="_blank">here</a></li>
-                <li class="">Anytime you hear a word(s) on your bingo board during the earnings call click it</li>
-                <li class="">If you get BINGO screenshot it and post it in the [x] channel</li>
-                <li class="">Once varified you will win [y] !fire(s)</li>
-                <li class="">Good luck you degens</li>
-                <li class="">All hail the DogshitQueen 🐩 💩 👸</li>
-            </ol>
-        </div>
-
-        <div id="header"></div>
-
-		<div id="board"></div>
-        
-        <div id="footer">
-
-            <ul class="footer-list">
-                <li class="footer-item"><a href="https://www.twitch.tv/martinirita" class="footer_icon" target="_blank"><i class="fab fa-twitch"></i></a></li>
-                <li class="footer-item"><a href="https://discord.gg/BnVzUCBq" class="footer_icon" target="_blank"><i class="fab fa-discord"></i></a></li>
-                <li class="footer-item"><a href="https://twitter.com/themartinirita" class="footer_icon" target="_blank"><i class="fab fa-twitter"></i></a></li>
+            <div class="">
                 
-                <!-- <li class=""><a href="https://www.youtube.com/MartiniRita" class="footer_icon" target="_blank"><i class="fab fa-youtube"></i></a></li>  -->
-            </ul>
+            </div>
 
+            <h2>How Earnings BINGO works:</h2>
+            <div class="">
+                <ol class="instructions">
+                    <li class="">Join the MartinaRita Discord <a href="https://discord.gg/BnVzUCBq" class="" target="_blank">here</a></li>
+                    <li class="">Anytime you hear a word(s) on your bingo board during the earnings call click it</li>
+                    <li class="">If you get BINGO screenshot it and post it in the [x] channel</li>
+                    <li class="">Once varified you will win [y] !fire(s)</li>
+                    <li class="">Good luck you degens</li>
+                    <li class="">All hail the DogshitQueen 🐩 💩 👸</li>
+                </ol>
+            </div>
+
+            <div id="header"></div>
+
+            <div id="board"></div>
+            
+            <div id="footer">
+
+                <ul class="footer-list">
+                    <li class="footer-item"><a href="https://www.twitch.tv/martinirita" class="footer_icon" target="_blank"><i class="fab fa-twitch"></i></a></li>
+                    <li class="footer-item"><a href="https://discord.gg/BnVzUCBq" class="footer_icon" target="_blank"><i class="fab fa-discord"></i></a></li>
+                    <li class="footer-item"><a href="https://twitter.com/themartinirita" class="footer_icon" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                    
+                    <!-- <li class=""><a href="https://www.youtube.com/MartiniRita" class="footer_icon" target="_blank"><i class="fab fa-youtube"></i></a></li>  -->
+                </ul>
+
+            </div>
         </div>
 	</div>
 </body>
