@@ -278,7 +278,15 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
         }
 
         #board {
-            font-family: var(--font_family-secondary);
+            font-family: var(--font_family-secondary)
+        }
+
+        .content {
+            margin: 2.4em 0;
+        }
+
+        .center {
+            justify-self: center;
         }
 
         .footer-item {
@@ -307,31 +315,32 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
         <div class="container">
 
-            <h1>Welcome to Earnings BINGO brought to you by <a href="https://www.twitch.tv/martinirita" target="_blank">MartinaRita</a></h1>
+            <div class="header center">
 
-            <div class="">
-                
-            </div>
+                <h1>Welcome to Earnings BINGO brought to you by <a href="https://www.twitch.tv/martinirita" target="_blank">MartinaRita</a></h1>
 
-            <h2>How Earnings BINGO works:</h2>
-            <div class="">
-                <ol class="instructions">
-                    <li class="">Join the MartinaRita Discord <a href="https://discord.gg/BnVzUCBq" class="" target="_blank">here</a></li>
-                    <li class="">Anytime you hear a word(s) on your bingo board during the earnings call click it</li>
-                    <li class="">If you get BINGO screenshot it and post it in the [x] channel</li>
-                    <li class="">Once varified you will win [y] !fire(s)</li>
-                    <li class="">Good luck you degens</li>
-                    <li class="">All hail the DogshitQueen 🐩 💩 👸</li>
-                </ol>
-            </div>
-
-
-
-            <div id="board"></div>
-            <div id="header"></div>
-
+                <h2>How Earnings BINGO works:</h2>
+                <div class="">
+                    <ol class="instructions">
+                        <li class="">Join the MartinaRita Discord <a href="https://discord.gg/BnVzUCBq" class="" target="_blank">here</a></li>
+                        <li class="">Anytime you hear a word(s) on your bingo board during the earnings call click it</li>
+                        <li class="">If you get BINGO screenshot it and post it in the [x] channel</li>
+                        <li class="">Once varified you will win [y] !fire(s)</li>
+                        <li class="">Good luck you degens</li>
+                        <li class="">All hail the DogshitQueen 🐩 💩 👸</li>
+                    </ol>
+                </div>
             
-            <div id="footer">
+            </div>
+
+
+            <div class="content center">
+                <div id="board"></div>
+                <div id="header"></div>
+            </div>
+
+
+            <div class="footer center" id="footer">
 
                 <ul class="footer-list">
                     <li class="footer-item"><a href="https://www.twitch.tv/martinirita" class="footer_icon" target="_blank"><i class="fab fa-twitch"></i></a></li>
