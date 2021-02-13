@@ -244,14 +244,20 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
             background: rgb(247,150,34);
             background: linear-gradient(156deg, rgba(247,150,34,1) 0%, rgba(255,146,175,0.9) 25%, rgba(164,55,114,0.85) 75%, rgba(196,84,105,1) 100%);
             display: grid;
-            grid-column: 2 / 3;
-            grid-row: 2 / 3;
-            grid-template-columns: 100fr;
-            grid-template-rows: 100fr 4.8rem;
+
+            grid-template: minmax(1.8rem, 6fr) repeat(2, 45fr) minmax(0.8rem, 4fr) / minmax(1.8rem, 6fr) 88fr minmax(1.8rem, 6fr);
             height: 100vh;
             max-height: 100vh;
             min-height: 100vh;
             width: 100vw;
+        }
+
+        .container {
+            display: grid; 
+
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+
         }
 
 
@@ -288,36 +294,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
 
 
 
-
-
-
-
-
-
-		/* @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-
-			#container {
-				width: 640;
-				margin: -7px 0px 0px -7px;
-			}
-
-			#header {
-				font-size: 3.6em;
-				text-align: center;
-				padding: 20px 20px 12px 20px;
-			}
-
-			#footer {
-				padding: 16px 20px 8px 20px;
-				font-size: 2.0em;
-			}
-
-			.text {
-				font-size: 1.2em;
-				line-height: 1.2em;
-			}
-		}
-        */
 	</style>
 
 </head>
@@ -349,9 +325,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
                 </ol>
             </div>
 
-            <div id="header"></div>
+
 
             <div id="board"></div>
+            <div id="header"></div>
+
             
             <div id="footer">
 
